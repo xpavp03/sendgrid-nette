@@ -59,11 +59,10 @@ class SendgridMailer implements IMailer
         reset($from);
         $key = key($from);
 
-        $email->setFrom($key)
-            ->setFromName($from[$key])
-            ->setSubject($message->getSubject())
-            ->setText($message->getBody())
-            ->setHtml($message->getHtmlBody());
+        $email->setFrom($key, $from[$key]);
+        $email->setSubject($message->getSubject());
+        $email->addContent('plain/text', $message->getBody());
+        $email->addContent('text/html', $message->getHtmlBody());
 
         foreach ($message->getAttachments() as $attachement) {
             $header = $attachement->getHeader('Content-Disposition');
@@ -76,15 +75,15 @@ class SendgridMailer implements IMailer
         }
 
         foreach ((array)$message->getHeader('To') as $recipient => $name) {
-            $email->addTo($recipient);
+            $email->addTo($recipient, $name);
         }
 
         foreach ((array)$message->getHeader('Cc') as $recipient => $name) {
-            $email->addCc($recipient);
+            $email->addCc($recipient, $name);
         }
 
         foreach ((array)$message->getHeader('Bcc') as $recipient => $name) {
-            $email->addBcc($recipient);
+            $email->addBcc($recipient, $name);
         }
 
         $sendGrid->send($email);
