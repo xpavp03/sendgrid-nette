@@ -50,7 +50,7 @@ class SendgridMailer implements IMailer
      *
      * @throws SendGrid\Exception
      */
-    public function send(Message $message)
+    public function send(Message $message): void
     {
         $sendGrid = new SendGrid($this->key);
         $email = new Email();
