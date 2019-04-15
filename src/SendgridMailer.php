@@ -6,7 +6,7 @@ use Nette\Mail\IMailer;
 use Nette\Mail\Message;
 use Nette\SmartObject;
 use SendGrid;
-use SendGrid\Email;
+use SendGrid\Mail\Mail;
 
 class SendgridMailer implements IMailer
 {
@@ -53,7 +53,7 @@ class SendgridMailer implements IMailer
     public function send(Message $message): void
     {
         $sendGrid = new SendGrid($this->key);
-        $email = new Email();
+        $email = new Mail();
 
         $from = $message->getFrom();
         reset($from);
