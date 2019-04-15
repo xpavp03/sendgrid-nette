@@ -61,7 +61,7 @@ class SendgridMailer implements IMailer
 
         $email->setFrom($key, $from[$key]);
         $email->setSubject($message->getSubject());
-        $email->addContent('plain/text', $message->getBody());
+        $email->addContent('text/plain', $message->getBody());
         $email->addContent('text/html', $message->getHtmlBody());
 
         foreach ($message->getAttachments() as $attachement) {
