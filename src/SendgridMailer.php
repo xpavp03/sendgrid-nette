@@ -8,7 +8,7 @@ use Nette\SmartObject;
 use SendGrid;
 use SendGrid\Email;
 
-class SendgridMailer extends Object implements IMailer
+class SendgridMailer implements IMailer
 {
     const ENDPOINT = "https://api.sendgrid.com/";
 
