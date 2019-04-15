@@ -4,13 +4,15 @@ namespace Istrix\Mail;
 
 use Nette\Mail\IMailer;
 use Nette\Mail\Message;
-use Nette\Object;
+use Nette\SmartObject;
 use SendGrid;
 use SendGrid\Email;
 
 class SendgridMailer extends Object implements IMailer
 {
     const ENDPOINT = "https://api.sendgrid.com/";
+
+    use SmartObject;
 
     /** @var string */
     private $key;
