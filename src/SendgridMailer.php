@@ -75,15 +75,15 @@ class SendgridMailer implements IMailer
             $email->addAttachment($filePath, $originalFileName);
         }
 
-        foreach ($message->getHeader('To') as $recipient => $name) {
+        foreach ((array)$message->getHeader('To') as $recipient => $name) {
             $email->addTo($recipient);
         }
 
-        foreach ($message->getHeader('Cc') as $recipient => $name) {
+        foreach ((array)$message->getHeader('Cc') as $recipient => $name) {
             $email->addCc($recipient);
         }
 
-        foreach ($message->getHeader('Bcc') as $recipient => $name) {
+        foreach ((array)$message->getHeader('Bcc') as $recipient => $name) {
             $email->addBcc($recipient);
         }
 
