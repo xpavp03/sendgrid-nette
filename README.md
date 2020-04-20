@@ -1,7 +1,7 @@
 # sendgrid-nette
 Sendgrid integration for Nette.
 
-[![Github badge](https://github.com/haltuf/sendgrid-nette/workflows/actions/badge.svg)](https://github.com/haltuf/sendgrid-nette/actions) [![Build Status](https://travis-ci.org/haltuf/sendgrid-nette.svg?branch=master)](https://travis-ci.org/haltuf/sendgrid-nette) [![Coverage Status](https://coveralls.io/repos/haltuf/sendgrid-nette/badge.svg)](https://coveralls.io/r/haltuf/sendgrid-nette)    
+[![Github badge](https://github.com/haltuf/sendgrid-nette/workflows/build/badge.svg)](https://github.com/haltuf/sendgrid-nette/actions) [![Build Status](https://travis-ci.org/haltuf/sendgrid-nette.svg?branch=master)](https://travis-ci.org/haltuf/sendgrid-nette) [![Coverage Status](https://coveralls.io/repos/haltuf/sendgrid-nette/badge.svg)](https://coveralls.io/r/haltuf/sendgrid-nette)    
 
 ## Install
 ```

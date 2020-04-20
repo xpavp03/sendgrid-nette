@@ -26,14 +26,10 @@ jobs:
       script:
         - vendor/bin/tester -s -p phpdbg -C --coverage ./coverage.xml --coverage-src ./src tests
       after_script:
-        - composer global require php-coveralls/php-coveralls ^2.2
-        - ~/.composer/vendor/bin/php-coveralls --verbose --config tests/.coveralls.yml
+        - composer require php-coveralls/php-coveralls ^2.2
+        - vendor/bin/php-coveralls --verbose --config tests/.coveralls.yml
 
   allow_failures:
     - stage: Test Coverage
 
 sudo: false
-
-cache:
-  directories:
-    - $HOME/.composer/cache
