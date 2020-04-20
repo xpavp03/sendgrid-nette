@@ -24,7 +24,7 @@ jobs:
       if: branch = master AND type = push
       php: 7.3
       script:
-        - vendor/bin/tester -s -p phpdbg -C --coverage ./coverage.xml --coverage-src ./src tests
+        - vendor/bin/tester -s -p phpdbg -C --coverage tests/coverage.xml --coverage-src ./src tests
       after_script:
         - composer require php-coveralls/php-coveralls ^2.2
         - vendor/bin/php-coveralls --verbose --config tests/.coveralls.yml
