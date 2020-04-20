@@ -1,18 +1,21 @@
 <?php declare(strict_types=1);
 
-use Nette\Mail\Mailer;
-
 class TestPresenter extends \Nette\Application\UI\Presenter
 {
 	/** @var \Haltuf\Sendgrid\SendgridMailer @inject */
 	public $mailer;
 
-	/** @var Mailer @inject */
-	public $mailer2;
+	/** @var \Nette\DI\Container @inject */
+	public $container;
 
 	public function actionDefault()
 	{
-		$a = get_class($this->mailer2);
+		if (class_exists('Nette\Mail\Mailer')) {
+			$defaultMailer = $this->container->getByType('Nette\Mail\Mailer');
+		} else {
+			$defaultMailer = $this->container->getByType('Nette\Mail\IMailer');
+		}
+
 		$this->template->className = get_class($this->mailer);
 	}
 }
