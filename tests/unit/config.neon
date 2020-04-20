@@ -1,3 +1,7 @@
+application:
+	mapping:
+		*: *Presenter
+
 extensions:
 	sendgrid: Haltuf\Sendgrid\DI\SendgridExtension
 

@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-require __DIR__ . '/../bootstrap.php';
+require __DIR__ . '/../Bootstrap.php';
 
 use Haltuf\Sendgrid\SendgridMailer;
 use Nette\Configurator;
@@ -12,23 +12,37 @@ use Tester\TestCase;
 class SendgridExtension extends TestCase
 {
 
+	/** @var \Nette\DI\Container */
+	private $container;
+
+	public function __construct(\Nette\DI\Container $container)
+	{
+		$this->container = $container;
+	}
+
 	public function testDI()
 	{
-		$container = $this->createContainer();
+		$container = $this->container;
 
 		Assert::type(SendmailMailer::class, $container->getService('nette.mailer'));
 		Assert::type(SendGrid::class, $container->getService('sendgrid.sendgrid'));
 		Assert::type(SendgridMailer::class, $container->getService('sendgrid.mailer'));
 	}
 
-	private function createContainer()
+	public function testInject()
 	{
-		$config = new Configurator();
-		$config->setTempDirectory(TEMP_DIR);
-		$config->addConfig(__DIR__ . '/config.neon');
+		$container = $this->container;
 
-		return $config->createContainer();
+		$presenterFactory = $container->getByType(\Nette\Application\IPresenterFactory::class);
+		$presenter = $presenterFactory->createPresenter('Test');
+		$presenter->autoCanonicalize = false;
+		$request = new Nette\Application\Request('Test', 'GET', ['action' => 'default']);
+		$response = $presenter->run($request);
+
+		Assert::same(SendgridMailer::class, (string) $response->getSource());
 	}
+
 }
 
-(new SendgridExtension())->run();
+$container = Bootstrap::bootForTests()->createContainer();
+(new SendgridExtension($container))->run();

@@ -9,7 +9,7 @@ use SendGrid;
 use SendGrid\Mail\Mail;
 use SendGrid\Response;
 
-class SendgridMailer implements Mailer
+class SendgridMailer
 {
     use SmartObject;
 

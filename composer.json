@@ -8,8 +8,10 @@
         "sendgrid/sendgrid": "^7.4"
     },
     "require-dev": {
-        "nette/tester": "^2.3",
-        "nette/bootstrap": "^3.0"
+        "latte/latte": "^2.7",
+        "nette/application": "^3.0",
+        "nette/bootstrap": "^3.0",
+        "nette/tester": "^2.3"
     },
     "license": "BSD-3-Clause",
     "autoload": {
