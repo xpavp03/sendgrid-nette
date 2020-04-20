@@ -1,34 +1,69 @@
 # sendgrid-nette
-Sendgrid integration for Nette mailer
+Sendgrid integration for Nette.
 
 ## Install
 ```
-composer require istrix/sendgrid-nette
+composer require haltuf/sendgrid-nette
 ```
 
 ## Configuration
 In config add:
 
 ```
-parameters:
-	sendgrid:
-		key: 'yourkey'
+extension:
+    sendgrid: Haltuf\Sendgrid\SendgridExtension
 
-services:
-	nette.mailer: Istrix\Mail\SendgridMailer(%sendgrid.key%, %tempDir%)
+sendgrid:
+    key: 'SECRET_KEY'
 ```
 
 ## Usage
-Just inject IMailer and send message...
+To make any API call to Sendgrid, just inject the Sendgrid class to your presenter:
 
 ```php
-	/** @var IMailer @inject */
-	public $mailer;
+    /** @var SendGrid @inject */
+    public $sendgrid;
 	
-	protected function sendMail() {
-		...
-		$this->mailer->send($message);
-		...
-	}
+    public function actionDefault()
+    {
+        // CALL suppression/bounces
+        try {
+            $response = $this->sendgrid->client->suppression()->bounces()->get();
+            print $response->statusCode() . "\n";
+            print_r($response->headers());
+            print $response->body() . "\n";
+        } catch (Exception $e) {
+            echo 'Caught exception: '.  $e->getMessage(). "\n";
+        }
+    }
 	
 ```
+
+To send an email via `Sendgrid`, just inject `Haltuf\Sendgrid\SendgridMailer` to your presenter:
+
+```php
+    /** @var \Haltuf\Sendgrid\SendgridMailer @inject */
+    public $mailer;
+	
+    protected function sendMail() {
+        
+        $message = new \Nette\Mail\Message();
+        $message->addTo('example@example.com');
+        $message->setSubject('TEST SUBJECT');
+        $message->setBody('TEST BODY');
+        
+        $this->mailer->send($message);
+        
+        /** @var \SendGrid\Response $response */
+        $response = $this->mailer->getLastResponse();   // optional, for error logging
+    }
+	
+```
+
+Calling `getLastResponse()` on `SendgridMailer` gets you `Sendgrid\Response` of the last `send()` call. You can use it to log errors.
+
+## Versions
+
+|Version|Nette|Sendgrid API|PHP
+|---|:---:|:---:|:---:|
+|master|^3.0|^7.4|^7.1

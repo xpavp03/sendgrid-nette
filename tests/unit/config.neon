@@ -1,0 +1,5 @@
+extensions:
+	sendgrid: Haltuf\Sendgrid\DI\SendgridExtension
+
+sendgrid:
+	key: 'SECRET_KEY123@5'

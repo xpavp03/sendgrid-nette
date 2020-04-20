@@ -1,16 +1,25 @@
 {
-    "name": "istrix/sendgrid-nette",
-    "description": "Sendgrid integration for Nette mailer",
+    "name": "haltuf/sendgrid-nette",
+    "description": "Sendgrid integration for Nette.",
     "require": {
         "php": ">=7.1",
-        "nette/mail": "~3.0",
-        "sendgrid/sendgrid": "~7"
+        "nette/mail": "^3.0",
+        "nette/di": "^3.0",
+        "sendgrid/sendgrid": "^7.4"
+    },
+    "require-dev": {
+        "nette/tester": "^2.3",
+        "nette/bootstrap": "^3.0"
     },
     "license": "BSD-3",
     "autoload": {
         "classmap": ["src/"]
     },
     "authors": [
+        {
+            "name": "Michal Haltuf",
+            "homepage": "http://www.michalhaltuf.cz"
+        },
         {
             "name": "Jan Gula",
             "email": "honza.gula@gmail.com"

@@ -1,58 +1,35 @@
-<?php
+<?php declare(strict_types=1);
 
-namespace Istrix\Mail;
+namespace Haltuf\Sendgrid;
 
-use Nette\Mail\IMailer;
+use Nette\Mail\Mailer;
 use Nette\Mail\Message;
 use Nette\SmartObject;
 use SendGrid;
 use SendGrid\Mail\Mail;
+use SendGrid\Response;
 
-class SendgridMailer implements IMailer
+class SendgridMailer implements Mailer
 {
-    const ENDPOINT = "https://api.sendgrid.com/";
-
     use SmartObject;
 
-    /** @var string */
-    private $key;
+    /** @var SendGrid */
+    private $sendgrid;
 
-    /** @var string */
-    private $tempFolder;
+    /** @var SendGrid\Response|null */
+    private $lastResponse;
 
-    /** @var array */
-    private $tempFiles = [];
-
-    /**
-     * MailSender constructor
-     *
-     * @param string $key
-     * @param string $tempFolder
-     */
-    public function __construct($key, $tempFolder)
+    public function __construct(SendGrid $sendgrid)
     {
-        $this->key = $key;
-        $this->tempFolder = $tempFolder;
+        $this->sendgrid = $sendgrid;
     }
 
-    /**
-     * @param string $key
-     */
-    public function setKey($key)
-    {
-        $this->key = $key;
-    }
-
-    /**
-     * Sends email to sendgrid
-     *
-     * @param Message $message
-     *
-     * @throws SendGrid\Exception
-     */
+	/**
+	 * @param Message $message
+	 * @throws SendGrid\Mail\TypeException
+	 */
     public function send(Message $message): void
     {
-        $sendGrid = new SendGrid($this->key);
         $email = new Mail();
 
         $from = $message->getFrom();
@@ -69,42 +46,27 @@ class SendgridMailer implements IMailer
             preg_match('/filename\=\"(.*)\"/', $header, $result);
             $originalFileName = $result[1];
 
-            $filePath = $this->saveTempAttachement($attachement->getBody());
-
-            $email->addAttachment($filePath, $originalFileName);
+            $email->addAttachment($attachement->getBody(), NULL, $originalFileName);
         }
 
-        foreach ((array)$message->getHeader('To') as $recipient => $name) {
+        foreach ((array) $message->getHeader('To') as $recipient => $name) {
             $email->addTo($recipient, $name);
         }
 
-        foreach ((array)$message->getHeader('Cc') as $recipient => $name) {
+        foreach ((array) $message->getHeader('Cc') as $recipient => $name) {
             $email->addCc($recipient, $name);
         }
 
-        foreach ((array)$message->getHeader('Bcc') as $recipient => $name) {
+        foreach ((array) $message->getHeader('Bcc') as $recipient => $name) {
             $email->addBcc($recipient, $name);
         }
 
-        $sendGrid->send($email);
-
-        $this->cleanUp();
+        $this->lastResponse = $this->sendgrid->send($email);
     }
 
-    private function saveTempAttachement($body)
-    {
-        $filePath = $this->tempFolder . '/' . md5($body);
-        file_put_contents($filePath, $body);
-        array_push($this->tempFiles, $filePath);
-
-        return $filePath;
-    }
-
-    private function cleanUp()
-    {
-        foreach ($this->tempFiles as $file) {
-            unlink($file);
-        }
-    }
+    public function getLastReponse(): ?Response
+	{
+		return $this->lastResponse;
+	}
 
 }
