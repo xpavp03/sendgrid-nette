@@ -1,9 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace App\Presenters;
-
 use Nette\Mail\Mailer;
-use Nette\Mail\SendmailMailer;
 
 class TestPresenter extends \Nette\Application\UI\Presenter
 {

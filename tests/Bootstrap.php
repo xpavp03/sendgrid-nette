@@ -19,7 +19,7 @@ class Bootstrap
 			->register();
 
 		$configurator
-			->addConfig(__DIR__ . '/unit/common.neon');
+			->addConfig(__DIR__ . '/unit/config.neon');
 
 		return $configurator;
 	}

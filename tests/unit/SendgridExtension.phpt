@@ -3,13 +3,11 @@
 require __DIR__ . '/../Bootstrap.php';
 
 use Haltuf\Sendgrid\SendgridMailer;
-use Nette\Configurator;
-use Nette\Mail\Mailer;
 use Nette\Mail\SendmailMailer;
 use Tester\Assert;
 use Tester\TestCase;
 
-class SendgridExtension extends TestCase
+class SendgridExtensionTest extends TestCase
 {
 
 	/** @var \Nette\DI\Container */
@@ -45,4 +43,4 @@ class SendgridExtension extends TestCase
 }
 
 $container = Bootstrap::bootForTests()->createContainer();
-(new SendgridExtension($container))->run();
+(new SendgridExtensionTest($container))->run();

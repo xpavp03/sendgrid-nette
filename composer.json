@@ -11,7 +11,8 @@
         "latte/latte": "^2.7",
         "nette/application": "^3.0",
         "nette/bootstrap": "^3.0",
-        "nette/tester": "^2.3"
+        "nette/tester": "^2.3",
+        "mockery/mockery": "^1.3"
     },
     "license": "BSD-3-Clause",
     "autoload": {
