@@ -1,0 +1,39 @@
+language: php
+php:
+  - 7.1
+  - 7.2
+  - 7.3
+  - 7.4
+
+install:
+  - travis_retry composer install --no-progress --prefer-dist
+
+script:
+  - vendor/bin/tester -s -p php -C tests
+
+jobs:
+  include:
+    - env: title="Lowest on PHP 7.1"
+      php: 7.1
+      install:
+        - travis_retry composer update --no-progress --prefer-dist --prefer-lowest --prefer-stable
+      script:
+        - vendor/bin/tester -s -p php -C tests
+
+    - stage: Test Coverage
+      if: branch = master AND type = push
+      php: 7.3
+      script:
+        - vendor/bin/tester -s -p phpdbg -C --coverage ./coverage.xml --coverage-src ./src tests
+      after_script:
+        - composer global require php-coveralls/php-coveralls ^2.2
+        - ~/.composer/vendor/bin/php-coveralls --verbose --config tests/.coveralls.yml
+
+  allow_failures:
+    - stage: Test Coverage
+
+sudo: false
+
+cache:
+  directories:
+    - $HOME/.composer/cache
