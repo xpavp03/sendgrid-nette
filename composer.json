@@ -11,7 +11,7 @@
         "nette/tester": "^2.3",
         "nette/bootstrap": "^3.0"
     },
-    "license": "BSD-3",
+    "license": "BSD-3-Clause",
     "autoload": {
         "classmap": ["src/"]
     },
