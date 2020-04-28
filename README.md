@@ -1,11 +1,11 @@
 # sendgrid-nette
 Sendgrid integration for Nette.
 
-[![Github badge](https://github.com/haltuf/sendgrid-nette/workflows/build/badge.svg)](https://github.com/haltuf/sendgrid-nette/actions) [![Build Status](https://travis-ci.org/haltuf/sendgrid-nette.svg?branch=master)](https://travis-ci.org/haltuf/sendgrid-nette) [![Coverage Status](https://coveralls.io/repos/haltuf/sendgrid-nette/badge.svg)](https://coveralls.io/r/haltuf/sendgrid-nette)    
+[![Github badge](https://github.com/price2performance/sendgrid-nette/workflows/build/badge.svg)](https://github.com/price2performance/sendgrid-nette/actions) [![Build Status](https://travis-ci.org/price2performance/sendgrid-nette.svg?branch=master)](https://travis-ci.org/price2performance/sendgrid-nette) [![Coverage Status](https://coveralls.io/repos/price2performance/sendgrid-nette/badge.svg)](https://coveralls.io/r/price2performance/sendgrid-nette)    
 
 ## Install
 ```
-composer require haltuf/sendgrid-nette
+composer require price2performance/sendgrid-nette
 ```
 
 ## Configuration
@@ -13,14 +13,14 @@ In config add:
 
 ```
 extension:
-    sendgrid: Haltuf\Sendgrid\SendgridExtension
+    sendgrid: Price2Performance\SendGrid\SendGridExtension
 
 sendgrid:
     key: 'SECRET_KEY'
 ```
 
 ## Usage
-To make any API call to Sendgrid, just inject the Sendgrid class to your presenter:
+To make any API call to SendGrid, just inject the SendGrid class to your presenter:
 
 ```php
     /** @var SendGrid @inject */
@@ -41,15 +41,16 @@ To make any API call to Sendgrid, just inject the Sendgrid class to your present
 	
 ```
 
-To send an email via `Sendgrid`, just inject `Haltuf\Sendgrid\SendgridMailer` to your presenter:
+To send an email via `SendGrid`, just inject `Price2Performance\SendGrid\SendGridMailer` to your presenter:
 
 ```php
-    /** @var \Haltuf\Sendgrid\SendgridMailer @inject */
+    /** @var \Price2Performance\SendGrid\SendGridMailer @inject */
     public $mailer;
 	
     protected function sendMail() {
         
         $message = new \Nette\Mail\Message();
+        $message->addFrom('sender@example.com', 'Sender Name');
         $message->addTo('example@example.com');
         $message->setSubject('TEST SUBJECT');
         $message->setBody('TEST BODY');
@@ -68,4 +69,5 @@ Calling `getLastResponse()` on `SendgridMailer` gets you `Sendgrid\Response` of 
 
 |Version|Nette|Sendgrid API|PHP
 |---|:---:|:---:|:---:|
-|master|^3.0|^7.4|^7.1
+|master|^3.0|^7.4|7.1 - 7.4
+|2.0|^3.0|^7.4|7.1 - 7.4

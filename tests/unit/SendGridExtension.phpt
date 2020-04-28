@@ -1,13 +1,17 @@
 <?php declare(strict_types=1);
 
+namespace Price2Performace\SendGrid\Tests;
+
 require __DIR__ . '/../Bootstrap.php';
 
-use Haltuf\Sendgrid\SendgridMailer;
+use Nette;
 use Nette\Mail\SendmailMailer;
+use Price2Performance\SendGrid\SendGridMailer;
+use SendGrid;
 use Tester\Assert;
 use Tester\TestCase;
 
-class SendgridExtensionTest extends TestCase
+class SendGridExtensionTest extends TestCase
 {
 
 	/** @var \Nette\DI\Container */
@@ -24,7 +28,7 @@ class SendgridExtensionTest extends TestCase
 
 		Assert::type(SendmailMailer::class, $container->getService('nette.mailer'));
 		Assert::type(SendGrid::class, $container->getService('sendgrid.sendgrid'));
-		Assert::type(SendgridMailer::class, $container->getService('sendgrid.mailer'));
+		Assert::type(SendGridMailer::class, $container->getService('sendgrid.mailer'));
 	}
 
 	public function testInject()
@@ -37,10 +41,10 @@ class SendgridExtensionTest extends TestCase
 		$request = new Nette\Application\Request('Test', 'GET', ['action' => 'default']);
 		$response = $presenter->run($request);
 
-		Assert::same(SendgridMailer::class, (string) $response->getSource());
+		Assert::same(SendGridMailer::class, (string) $response->getSource());
 	}
 
 }
 
 $container = Bootstrap::bootForTests()->createContainer();
-(new SendgridExtensionTest($container))->run();
+(new SendGridExtensionTest($container))->run();

@@ -1,5 +1,5 @@
 {
-    "name": "haltuf/sendgrid-nette",
+    "name": "price2performance/sendgrid-nette",
     "description": "Sendgrid integration for Nette.",
     "require": {
         "php": ">=7.1",

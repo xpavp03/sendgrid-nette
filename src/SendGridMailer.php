@@ -1,15 +1,14 @@
 <?php declare(strict_types=1);
 
-namespace Haltuf\Sendgrid;
+namespace Price2Performance\SendGrid;
 
-use Nette\Mail\Mailer;
 use Nette\Mail\Message;
 use Nette\SmartObject;
 use SendGrid;
 use SendGrid\Mail\Mail;
 use SendGrid\Response;
 
-class SendgridMailer
+class SendGridMailer
 {
     use SmartObject;
 

@@ -1,14 +1,14 @@
 <?php declare(strict_types=1);
 
-namespace Haltuf\Sendgrid\DI;
+namespace Price2Performance\SendGrid\DI;
 
-use Haltuf\Sendgrid\SendgridMailer;
 use Nette\DI\CompilerExtension;
 use Nette\Schema\Expect;
 use Nette\Schema\Schema;
+use Price2Performance\SendGrid\SendGridMailer;
 use Sendgrid;
 
-class SendgridExtension extends CompilerExtension
+class SendGridExtension extends CompilerExtension
 {
 
     public function getConfigSchema(): Schema

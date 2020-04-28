@@ -1,5 +1,7 @@
 <?php declare(strict_types=1);
 
+namespace Price2Performace\SendGrid\Tests;
+
 require __DIR__ . '/../vendor/autoload.php';
 
 use Nette\Configurator;

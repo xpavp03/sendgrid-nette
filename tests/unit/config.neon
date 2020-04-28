@@ -3,7 +3,7 @@ application:
 		*: *Presenter
 
 extensions:
-	sendgrid: Haltuf\Sendgrid\DI\SendgridExtension
+	sendgrid: Price2Performance\SendGrid\DI\SendGridExtension
 
 sendgrid:
 	key: 'SECRET_KEY123@5'

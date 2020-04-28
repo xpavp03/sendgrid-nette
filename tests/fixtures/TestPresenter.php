@@ -2,7 +2,7 @@
 
 class TestPresenter extends \Nette\Application\UI\Presenter
 {
-	/** @var \Haltuf\Sendgrid\SendgridMailer @inject */
+	/** @var \Price2Performance\SendGrid\SendGridMailer @inject */
 	public $mailer;
 
 	/** @var \Nette\DI\Container @inject */

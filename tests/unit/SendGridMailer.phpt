@@ -1,13 +1,16 @@
 <?php declare(strict_types=1);
 
+namespace Price2Performace\SendGrid\Tests;
+
 require __DIR__ . '/../Bootstrap.php';
 
-use Haltuf\Sendgrid\SendgridMailer;
-use Nette\Mail\SendmailMailer;
+use Mockery;
+use Price2Performance\SendGrid\SendGridMailer;
+use SendGrid;
 use Tester\Assert;
 use Tester\TestCase;
 
-class SendgridMailerTest extends TestCase
+class SendGridMailerTest extends TestCase
 {
 
 	/** @var \Nette\DI\Container */
@@ -78,4 +81,4 @@ class SendgridMailerTest extends TestCase
 }
 
 $container = Bootstrap::bootForTests()->createContainer();
-(new SendgridMailerTest($container))->run();
+(new SendGridMailerTest($container))->run();
