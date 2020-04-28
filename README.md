@@ -63,11 +63,11 @@ To send an email via `SendGrid`, just inject `Price2Performance\SendGrid\SendGri
 	
 ```
 
-Calling `getLastResponse()` on `SendgridMailer` gets you `Sendgrid\Response` of the last `send()` call. You can use it to log errors.
+Calling `getLastResponse()` on `SendGridMailer` gets you `SendGrid\Response` of the last `send()` call. You can use it to log errors.
 
 ## Versions
 
-|Version|Nette|Sendgrid API|PHP
+|Version|Nette|SendGrid API|PHP
 |---|:---:|:---:|:---:|
 |master|^3.0|^7.4|7.1 - 7.4
 |2.0|^3.0|^7.4|7.1 - 7.4
