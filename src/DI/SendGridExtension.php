@@ -6,7 +6,7 @@ use Nette\DI\CompilerExtension;
 use Nette\Schema\Expect;
 use Nette\Schema\Schema;
 use Price2Performance\SendGrid\SendGridMailer;
-use Sendgrid;
+use SendGrid;
 
 class SendGridExtension extends CompilerExtension
 {
@@ -34,7 +34,7 @@ class SendGridExtension extends CompilerExtension
 			]);
 
 		$builder->addDefinition($this->prefix('mailer'))
-			->setFactory(SendgridMailer::class, [
+			->setFactory(SendGridMailer::class, [
 				$sendgrid
 			]);
 	}
