@@ -13,7 +13,7 @@ In config add:
 
 ```
 extension:
-    sendgrid: Price2Performance\SendGrid\SendGridExtension
+    sendgrid: Price2Performance\SendGrid\DI\SendGridExtension
 
 sendgrid:
     key: 'SECRET_KEY'
