@@ -63,7 +63,7 @@ class SendGridMailer
         $this->lastResponse = $this->sendgrid->send($email);
     }
 
-    public function getLastReponse(): ?Response
+    public function getLastResponse(): ?Response
 	{
 		return $this->lastResponse;
 	}
